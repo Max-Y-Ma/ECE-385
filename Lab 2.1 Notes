@@ -35,3 +35,4 @@ Design Decisions:
   a. We changed to using MUXes to initialise the flip flops because we calculated it required fewer chips, wiring and area (chipsize). 
   It also gives us greater debugging control - we can start in any state of our choosing.
 3. Indicator LED for 0000 saying ready to execute
+4. Routing unit implemented via dual 4x1 MUX.
