@@ -13,6 +13,8 @@ Checkpoints:
 1. Unit test shift registers: 22/1 DONE
 2. FSM logic: 22/1 DONE
   a. Initialisation should always move to 0000 - CHANGED to init MUXes
+  b. Fritzing FSM schematic 22/1
+  c. OH 22/1
 3. Build FSM physically: 23/1
 4. Get our FPGA drivers working: OH
 5. Test FSM truth table - debounced button for "slow clock": 23/1
