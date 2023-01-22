@@ -5,3 +5,24 @@ Things to find out:
 3. Figure out shift register usage - datasheet
 4. Possible unit testing of each chip before integration onto circuit
 5. Layout on Fritzing before anythin physically
+6. Which damn shift register are we supposed to use??
+7. Figure out mode logic using load A and load B
+
+Checkpoints:
+
+1. Unit test shift registers: 22/1
+2. FSM logic: 22/1
+  a. Initialisation should always move to 0000
+3. Build FSM physically: 23/1
+4. Get our FPGA drivers working: OH
+5. Test FSM truth table - debounced button for "slow clock": 23/1
+6. FSM + shift registers
+  a. Use parallel output to validate register values
+7. Computational logic and MUX - unit test
+8. Routing - unit test
+9. Create test points with LEDs
+  a. Computation complete indicator - back in 0000
+  b. Parallel out shows register values
+  c. Output (obviously)
+10. Ice cream!: 27/1
+
