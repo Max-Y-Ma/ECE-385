@@ -11,8 +11,8 @@ Things to find out:
 Checkpoints:
 
 1. Unit test shift registers: 22/1 DONE
-2. FSM logic: 22/1
-  a. Initialisation should always move to 0000
+2. FSM logic: 22/1 DONE
+  a. Initialisation should always move to 0000 - CHANGED to init MUXes
 3. Build FSM physically: 23/1
 4. Get our FPGA drivers working: OH
 5. Test FSM truth table - debounced button for "slow clock": 23/1
@@ -29,5 +29,7 @@ Checkpoints:
 Design Decisions:
 
 1. Storing S on the flip flop as well - will make debugging easier and possibly prevent errors.
-2. Don't care states for the FSM lead back to 0000
+2. Don't care states for the FSM lead back to 0000 - NO LONGER
+  a. We changed to using MUXes to initialise the flip flops because we calculated it required fewer chips, wiring and area (chipsize). 
+  It also gives us greater debugging control - we can start in any state of our choosing.
 3. Indicator LED for 0000 saying ready to execute
