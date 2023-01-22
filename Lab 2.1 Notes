@@ -29,3 +29,5 @@ Checkpoints:
 Design Decisions:
 
 1. Storing S on the flip flop as well - will make debugging easier and possibly prevent errors.
+2. Don't care states for the FSM lead back to 0000
+3. Indicator LED for 0000 saying ready to execute
