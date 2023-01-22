@@ -1,0 +1,7 @@
+Things to find out:
+
+1. Is Load A instantaneous/ requires execute? Parallel loading??
+2. Should Load A and execute be allowed to be done together
+3. Figure out shift register usage - datasheet
+4. Possible unit testing of each chip before integration onto circuit
+5. Layout on Fritzing before anythin physically
