@@ -10,7 +10,7 @@ Things to find out:
 
 Checkpoints:
 
-1. Unit test shift registers: 22/1
+1. Unit test shift registers: 22/1 DONE
 2. FSM logic: 22/1
   a. Initialisation should always move to 0000
 3. Build FSM physically: 23/1
