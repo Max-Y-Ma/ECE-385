@@ -38,3 +38,5 @@ Design Decisions:
 4. Routing unit implemented via dual 4x1 MUX.
 5. Computational logic - we have 3 NAND gates unused. We can use 3 to construct OR (and hence NOR). The remaining gives us NAND and AND. 
     The only function left is XOR/XNOR, which we will require an additional chip for. Total expected chips is 12.
+6. OH - Counter for C1 and C0 - saves one chip.
+
