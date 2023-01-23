@@ -41,5 +41,7 @@ Design Decisions:
 6. OH - Counter for C1 and C0 - saves one chip.
 7. 4 to 1 MUX and XOR instead of 8 to 1 MUX for computational logic.
 8. Counter for C1 and C0 - CLR signal implemented via SQC1C0 Kmap.
+9. If load and shift are sent together, then do nothing. Safety plus simplifies logic.
+10. New chip estimate = 10, plus LEDs and switches for testing and demo.
 
 
