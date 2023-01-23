@@ -1,0 +1,45 @@
+Things to find out:
+
+1. Is Load A instantaneous/ requires execute? Parallel loading??
+2. Should Load A and execute be allowed to be done together
+3. Figure out shift register usage - datasheet
+4. Possible unit testing of each chip before integration onto circuit
+5. Layout on Fritzing before anythin physically
+6. Which damn shift register are we supposed to use??
+7. Figure out mode logic using load A and load B
+
+Checkpoints:
+
+1. Unit test shift registers: 22/1 DONE
+2. FSM logic: 22/1 DONE
+  a. Initialisation should always move to 0000 - CHANGED to init MUXes
+  b. Fritzing FSM schematic 22/1
+  c. OH 22/1
+3. Build FSM physically: 23/1
+4. Get our FPGA drivers working: OH
+5. Test FSM truth table - debounced button for "slow clock": 23/1
+6. FSM + shift registers
+  a. Use parallel output to validate register values
+7. Computational logic and MUX - unit test
+8. Routing - unit test
+9. Create test points with LEDs
+  a. Computation complete indicator - back in 0000
+  b. Parallel out shows register values
+  c. Output (obviously)
+10. Ice cream!: 27/1
+
+Design Decisions:
+
+1. Storing S on the flip flop as well - will make debugging easier and possibly prevent errors.
+2. Don't care states for the FSM lead back to 0000 - NO LONGER
+  a. We changed to using MUXes to initialise the flip flops because we calculated it required fewer chips, wiring and area (chipsize). 
+  It also gives us greater debugging control - we can start in any state of our choosing.
+3. Indicator LED for 0000 saying ready to execute
+4. Routing unit implemented via dual 4x1 MUX.
+5. Computational logic - we have 3 NAND gates unused. We can use 3 to construct OR (and hence NOR). The remaining gives us NAND and AND. 
+    The only function left is XOR/XNOR, which we will require an additional chip for. Total expected chips is 12.
+6. OH - Counter for C1 and C0 - saves one chip.
+7. 4 to 1 MUX and XOR instead of 8 to 1 MUX for computational logic.
+8. Counter for C1 and C0 - CLR signal implemented via SQC1C0 Kmap.
+
+
