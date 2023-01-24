@@ -13,16 +13,17 @@ Checkpoints:
 1. Unit test shift registers: 22/1 DONE
 2. FSM logic: 22/1 DONE
   a. Initialisation should always move to 0000 - CHANGED to init MUXes
-  b. Fritzing FSM schematic 22/1
-  c. OH 22/1
-3. Build FSM physically: 23/1
-4. Get our FPGA drivers working: OH
-5. Test FSM truth table - debounced button for "slow clock": 23/1
+  b. Fritzing FSM schematic 22/1 DONE
+  c. OH 22/1 DONE
+3. Build FSM physically: 23/1 DONE
+4. Get our FPGA drivers working: OH DONE
+5. Test FSM truth table - debounced button for "slow clock": 23/1 DONE
 6. FSM + shift registers
-  a. Use parallel output to validate register values
-7. Computational logic and MUX - unit test
-8. Routing - unit test
-9. Create test points with LEDs
+  a. Shift register control logic unit test
+  c. Use parallel output to validate register values
+7. Computational logic and MUX - unit test 25/1
+8. Routing - unit test 25/1
+9. Create test points with LEDs 
   a. Computation complete indicator - back in 0000
   b. Parallel out shows register values
   c. Output (obviously)
@@ -42,6 +43,6 @@ Design Decisions:
 7. 4 to 1 MUX and XOR instead of 8 to 1 MUX for computational logic.
 8. Counter for C1 and C0 - CLR signal implemented via SQC1C0 Kmap.
 9. If load and shift are sent together, then do nothing. Safety plus simplifies logic.
-10. New chip estimate = 10, plus LEDs and switches for testing and demo.
+10. New chip estimate = 11, plus LEDs and switches for testing and demo.
 
 
