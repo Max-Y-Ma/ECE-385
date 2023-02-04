@@ -10,7 +10,7 @@ cModel Technology
 Z0 dC:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/Logic_Processor_8bit/simulation/modelsim
 vcompute
 Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
-Z2 !s110 1675313443
+Z2 !s110 1675437511
 !i10b 1
 !s100 i=]6932U1_OWO<5E?3HbR1
 IhHg_3=zQ]INAZkDVIIj`o2
@@ -26,7 +26,7 @@ Z5 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z6 !s108 1675313443.000000
+Z6 !s108 1675437511.000000
 !s107 C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/compute.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit|C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/compute.sv|
 !i113 1
@@ -86,7 +86,7 @@ R9
 n@hex@driver
 vProcessor
 R1
-R2
+Z10 !s110 1675437512
 !i10b 1
 !s100 4=XmYbYK^>DVlfebV_:kf1
 IezjjFZY^;:gP01I^?7PjM2
@@ -94,7 +94,7 @@ R3
 !s105 Processor_sv_unit
 S1
 R0
-w1675312739
+w1675437449
 8C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Processor.sv
 FC:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Processor.sv
 L0 8
@@ -102,7 +102,7 @@ R5
 r1
 !s85 0
 31
-R6
+Z11 !s108 1675437512.000000
 !s107 C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Processor.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit|C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Processor.sv|
 !i113 1
@@ -170,7 +170,7 @@ R3
 !s105 Router_sv_unit
 S1
 R0
-Z10 w1612570585
+Z12 w1612570585
 8C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Router.sv
 FC:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Router.sv
 L0 1
@@ -187,82 +187,82 @@ R8
 R9
 vsync
 R1
-Z11 !s110 1675313442
+R2
 !i10b 1
 !s100 2W5Vz0:F6ckE2`eJOTK5l1
 Im6QMS5SEaXO?GEc0YZfBZ3
 R3
-Z12 !s105 Synchronizers_sv_unit
+Z13 !s105 Synchronizers_sv_unit
 S1
 R0
-R10
-Z13 8C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Synchronizers.sv
-Z14 FC:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Synchronizers.sv
+R12
+Z14 8C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Synchronizers.sv
+Z15 FC:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Synchronizers.sv
 L0 4
 R5
 r1
 !s85 0
 31
-Z15 !s108 1675313442.000000
-Z16 !s107 C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Synchronizers.sv|
-Z17 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit|C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Synchronizers.sv|
+Z16 !s108 1675437510.000000
+Z17 !s107 C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Synchronizers.sv|
+Z18 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit|C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/logic_processor_4bit/Synchronizers.sv|
 !i113 1
 R7
 R8
 R9
 vsync_r0
 R1
-R11
+R2
 !i10b 1
 !s100 IGd9f_F;JNjVBLQ@DAnD10
 IIE@PmRJTSOj]K<7Z?KGfh3
 R3
-R12
+R13
 S1
 R0
-R10
-R13
+R12
 R14
+R15
 L0 18
 R5
 r1
 !s85 0
 31
-R15
 R16
 R17
+R18
 !i113 1
 R7
 R8
 R9
 vsync_r1
 R1
-R11
+R2
 !i10b 1
 !s100 1CXiH1DYDbAUS69Ee2j060
 I:g>>eT;UcWRI:FK;Mc9aG2
 R3
-R12
+R13
 S1
 R0
-R10
-R13
+R12
 R14
+R15
 L0 39
 R5
 r1
 !s85 0
 31
-R15
 R16
 R17
+R18
 !i113 1
 R7
 R8
 R9
 vtestbench_8
 R1
-R2
+R10
 !i10b 1
 !s100 X[88G4b[D]An>iaNUDD_Y1
 I?ZMG?HVMiagAcKdM>C1PG1
@@ -278,7 +278,7 @@ R5
 r1
 !s85 0
 31
-R6
+R11
 !s107 C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/Logic_Processor_8bit/../logic_processor_4bit/testbench_8.sv|
 !s90 -reportprogress|300|-sv|-work|work|+incdir+C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/Logic_Processor_8bit/../logic_processor_4bit|C:/Users/unbre/Documents/UIUC 2021-2025 Course Info/2022-2023 Spring Semester/ECE-385/Lab2/Week2/Logic_Processor_8bit/../logic_processor_4bit/testbench_8.sv|
 !i113 1
