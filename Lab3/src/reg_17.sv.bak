@@ -1,6 +1,6 @@
-module reg_17 ( input 				    	 Clk, Reset, Load,
+module reg_17 ( input						Clk, Reset, Load,
 					input					[16:0] D,
-					output logic 		[16:0] Data_Out);
+					output logic 			[16:0] Data_Out);
 					
 		always_ff @ (posedge Clk)
 		begin

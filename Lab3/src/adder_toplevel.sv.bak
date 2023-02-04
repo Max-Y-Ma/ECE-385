@@ -5,16 +5,16 @@
 //Upper 4 HEX digits will reflect value in the accumulator
 
 
-module adder_toplevel  (input 					Clk, Reset_Clear, Run_Accumulate, 
-								input [9:0]				SW,
-								output logic [9:0]	LED,
-								output logic [6:0]	HEX0, 
-															HEX1, 
-															HEX2, 
-															HEX3, 
-															HEX4,
-															HEX5
-								);
+module adder_toplevel  (input Clk, Reset_Clear, Run_Accumulate, 
+						input [9:0]			SW,
+						output logic [9:0]	LED,
+						output logic [6:0]	HEX0, 
+											HEX1, 
+											HEX2, 
+											HEX3, 
+											HEX4,
+											HEX5
+										);
 
 		// Declare temporary values used by other modules
 		logic Reset_h, Run_h;
