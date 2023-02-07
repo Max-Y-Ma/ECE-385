@@ -30,7 +30,6 @@ module adder_toplevel  (input 					Clk, Reset_Clear, Run_Accumulate,
 		begin
 				Reset_h = ~Reset_Clear;
 				Run_h = ~Run_Accumulate;
-
 		end
 		
 		// Control unit allows the register to load once, and not during full duration of button press
@@ -44,9 +43,9 @@ module adder_toplevel  (input 					Clk, Reset_Clear, Run_Accumulate,
 
 		// Addition unit
 
-		ripple_adder adder		(.A(extended_SW[15:0]), .B(Out[15:0]), .cin(1'b0), .cout(S[16]), .S(S[15:0]) );
+		//ripple_adder adder		(.A(extended_SW[15:0]), .B(Out[15:0]), .cin(1'b0), .cout(S[16]), .S(S[15:0]) );
 		
-		//lookahead_adder adderla	(.A(extended_SW[15:0]), .B(Out[15:0]), .cin(1'b0), .cout(S[16]), .S(S[15:0]) );
+		lookahead_adder adderla	(.A(extended_SW[15:0]), .B(Out[15:0]), .cin(1'b0), .cout(S[16]), .S(S[15:0]));
 		
 		//select_adder adders	(.A(extended_SW[15:0]), .B(Out[15:0]), .cin(1'b0), .cout(S[16]), .S(S[15:0]) );
 
