@@ -28,7 +28,8 @@ initial begin: SIGNAL_INITIALIZATION
 end
 
 // Unit Under Test
-lookahead_adder UUT(.A(A), .B(B), .cin(1'b0), .cout(S[16]), .S(S[15:0]) );
+//lookahead_adder UUT(.A(A), .B(B), .cin(1'b0), .cout(S[16]), .S(S[15:0]) );
+ripple_adder UUT(.A(A), .B(B), .cin(1'b0), .cout(S[16]), .S(S[15:0]) );
 
 initial begin: TESTS
 // Test 1: Normal Test
