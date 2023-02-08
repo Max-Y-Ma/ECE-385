@@ -12,7 +12,7 @@ module ripple_adder (
      * Feel free to create sub-modules or other files. */
 	  logic c0,c1,c2;
 	  
-	  ripple_adder_4bit RA0 (.A(A[3:0]), .B(B[3:0]), .cin(0), .S(S[3:0]), .cout(c0));
+	  ripple_adder_4bit RA0 (.A(A[3:0]), .B(B[3:0]), .cin(1'b0), .S(S[3:0]), .cout(c0));
 	  ripple_adder_4bit RA1 (.A(A[3:0]), .B(B[3:0]), .cin(c0), .S(S[7:4]), .cout(c1));
 	  ripple_adder_4bit RA2 (.A(A[3:0]), .B(B[3:0]), .cin(c1), .S(S[11:8]), .cout(c2));
 	  ripple_adder_4bit RA3 (.A(A[3:0]), .B(B[3:0]), .cin(c2), .S(S[15:12]), .cout(cout));
