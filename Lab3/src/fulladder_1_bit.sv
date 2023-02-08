@@ -4,4 +4,4 @@ module fulladder_1_bit( input x,y,z,
 assign s = x^y^z;
 assign c = (x&y)|(y&z)|(x&z);
 
-endmodule
+endmodule 
