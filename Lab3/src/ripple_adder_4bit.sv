@@ -1,5 +1,5 @@
 module ripple_adder_4bit (
-	input  [3:0] A, B,
+	input [3:0] A, B,
 	input         cin,
 	output [3:0] S,
 	output        cout
