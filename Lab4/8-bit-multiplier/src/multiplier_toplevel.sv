@@ -33,7 +33,10 @@ module multiplier_toplevel (
 	logic A_LSB;					// LSB of Register A
 	
 	// X: Signed Bit of Multiplication Result
-	assign Xval = Adder_Out[8];
+	always_ff @ (posedge Clk)
+	begin
+		Xval <= Adder_Out[8];
+	end
 	
 	// Register Instantiation	
 	reg_8 			reg_A(.Clk(Clk), 
