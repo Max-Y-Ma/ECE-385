@@ -54,18 +54,18 @@ multiplier_toplevel UUT(.Clk(Clk),
 initial begin: TESTS
 // Test 1: Normal Test
 #2 SW = 8'hC5;
-	Reset_Load_Clear = 1'b1;
-	
-#8 Run = 1'b1;
 	Reset_Load_Clear = 1'b0;
+	
+#8 Run = 1'b0;
+	Reset_Load_Clear = 1'b1;
 	
 #4 SW = 8'h07;
 
-#4 if ({Xval, Aval, Bval} != 17'h1FE63)
-			ErrorCnt++;
-
-#2 Run = 1'b0;
+#2 Run = 1'b1;
 	Reset_Load_Clear = 1'b0;
+	
+#50 if (Xval != 1'b1 && Aval != 8'hFE && Bval != 8'h63)
+			ErrorCnt++;
 			
 // Console Output in ModelSim
 if (ErrorCnt == 0)

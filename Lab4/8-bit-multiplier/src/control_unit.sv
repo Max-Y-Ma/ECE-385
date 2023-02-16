@@ -1,6 +1,6 @@
 module control_unit (
 	input logic Clk, Reset_Load_Clear, Run, M,
-	output logic LoadA, LoadB, Shift_En, Add_Signal, A_rst, B_rst, X_rst,
+	output logic LoadA, LoadB, LoadX, Shift_En, Add_Signal, A_rst, B_rst, X_rst,
 	output logic [3:0] State, 
 	output logic [2:0] Counter
 	);
@@ -143,6 +143,7 @@ module control_unit (
 			begin
 				LoadA = 1'b0;
 				LoadB = 1'b0;
+				LoadX = 1'b0;
 				Shift_En = 1'b0;
 				Add_Signal = 1'b1;
 				A_rst = 1'b0;
@@ -153,18 +154,27 @@ module control_unit (
 			LOAD_B: 
 			begin
 				LoadA = 1'b0;
-				LoadB = 1'b1;
+				if (Reset_Load_Clear)
+				begin
+					LoadB = 1'b1;
+					A_rst = 1'b1;
+					X_rst = 1'b1;
+				end else begin
+					LoadB = 1'b0;
+					A_rst = 1'b0;
+					X_rst = 1'b0;
+				end
+				LoadX = 1'b0;
 				Shift_En = 1'b0;
 				Add_Signal = 1'b1;
-				A_rst = 1'b0;
 				B_rst = 1'b0;
-				X_rst = 1'b0;
 			end
 			
 			INIT:
 			begin
 				LoadA = 1'b0;
 				LoadB = 1'b0;
+				LoadX = 1'b0;
 				Shift_En = 1'b0;
 				Add_Signal = 1'b1;
 				A_rst = 1'b1;
@@ -176,6 +186,7 @@ module control_unit (
 			begin
 				LoadA = 1'b0;
 				LoadB = 1'b0;
+				LoadX = 1'b0;
 				Shift_En = 1'b1;
 				Add_Signal = 1'b1;
 				A_rst = 1'b0;
@@ -187,6 +198,7 @@ module control_unit (
 			begin
 				LoadA = 1'b0;
 				LoadB = 1'b0;
+				LoadX = 1'b0;
 				Shift_En = 1'b0;
 				Add_Signal = 1'b1;
 				A_rst = 1'b0;
@@ -198,6 +210,7 @@ module control_unit (
 			begin
 				LoadA = 1'b1;
 				LoadB = 1'b0;
+				LoadX = 1'b1;
 				Shift_En = 1'b0;
 				Add_Signal = 1'b1;
 				A_rst = 1'b0;
@@ -209,6 +222,7 @@ module control_unit (
 			begin
 				LoadA = 1'b1;
 				LoadB = 1'b0;
+				LoadX = 1'b1;
 				Shift_En = 1'b0;
 				Add_Signal = 1'b0;
 				A_rst = 1'b0;
@@ -220,6 +234,7 @@ module control_unit (
 			begin
 				LoadA = 1'b0;
 				LoadB = 1'b0;
+				LoadX = 1'b0;
 				Shift_En = 1'b1;
 				Add_Signal = 1'b0;
 				A_rst = 1'b0;
@@ -231,6 +246,7 @@ module control_unit (
 			begin
 				LoadA = 1'b0;
 				LoadB = 1'b0;
+				LoadX = 1'b0;
 				Shift_En = 1'b0;
 				Add_Signal = 1'b1;
 				A_rst = 1'b0;
@@ -242,6 +258,7 @@ module control_unit (
 			begin 
 				LoadA = 1'b0;
 				LoadB = 1'b0;
+				LoadX = 1'b0;
 				Shift_En = 1'b0;
 				Add_Signal = 1'b1;
 				A_rst = 1'b0;

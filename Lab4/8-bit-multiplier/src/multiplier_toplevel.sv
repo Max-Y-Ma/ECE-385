@@ -19,14 +19,21 @@ module multiplier_toplevel (
 	logic [7:0] SW_S;
 	
 	// Schronizer Instantiation
-	synchronizer RLC_Sync(.Clk(Clk), .d(Reset_Load_Clear), .q(Reset_Load_Clear_S));
-	synchronizer Run_Sync(.Clk(Clk), .d(Run), .q(Run_S));
+	synchronizer RLC_Sync(.Clk(Clk), .d(Reset_Load_Clear), .q(Reset_Load_Clear_H));
+	synchronizer Run_Sync(.Clk(Clk), .d(Run), .q(Run_H));
 	synchronizer SW_Sync[7:0](.Clk(Clk), .d(SW[7:0]), .q(SW_S[7:0]));
+	
+	// Invert Button
+	always_comb
+	begin
+		Reset_Load_Clear_S = ~Reset_Load_Clear_H;
+		Run_S = ~Run_H;
+	end
 
 	// Internal Logic
 	logic M;								// Input to FSM
 	logic A_rst, B_rst, X_rst;		// Output Controlled by FSM
-	logic LoadA, LoadB;				// Output Controlled by FSM
+	logic LoadA, LoadB, LoadX;				// Output Controlled by FSM
 	logic Shift_En;					// Output Controlled by FSM
 	logic Add_Signal;					// Output Controlled by FSM
 	
@@ -40,7 +47,9 @@ module multiplier_toplevel (
 		if (X_rst) 
 		begin
 			Xval <= 1'b0;
-		end else begin
+		end 
+		else if (LoadX) 
+		begin
 			Xval <= Adder_Out[8];
 		end
 	end
@@ -83,6 +92,7 @@ module multiplier_toplevel (
 							 .M(M),
 							 .LoadA(LoadA), 
 							 .LoadB(LoadB), 
+							 .LoadX(LoadX),
 							 .Shift_En(Shift_En), 
 							 .Add_Signal(Add_Signal),
 							 .A_rst(A_rst), 
