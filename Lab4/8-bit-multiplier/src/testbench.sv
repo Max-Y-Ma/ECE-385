@@ -27,6 +27,7 @@ logic [7:0] SW;
 logic [6:0] HEX0, HEX1, HEX2, HEX3; 
 logic [7:0] Aval, Bval;
 logic Xval;
+logic [2:0] State, Counter;
 
 initial begin: SIGNAL_INITIALIZATION
 #1 Reset_Load_Clear = 1'b0;
@@ -45,7 +46,9 @@ multiplier_toplevel UUT(.Clk(Clk),
 								.HEX3(HEX3),
 								.Aval(Aval), 
 								.Bval(Bval),
-								.Xval(Xval)
+								.Xval(Xval),
+								.State(State),
+								.Counter(Counter)
 								);
 
 initial begin: TESTS
@@ -58,7 +61,7 @@ initial begin: TESTS
 	
 #4 SW = 8'h07;
 
-#4 if ({Xval, Aval, Bval} != 17'h00019)
+#4 if ({Xval, Aval, Bval} != 17'h1FE63)
 			ErrorCnt++;
 
 #2 Run = 1'b0;

@@ -1,11 +1,13 @@
 module control_unit (
 	input logic Clk, Reset_Load_Clear, Run, M,
-	output logic LoadA, LoadB, Shift_En, Add_Signal, A_rst, B_rst, X_rst
+	output logic LoadA, LoadB, Shift_En, Add_Signal, A_rst, B_rst, X_rst,
+	output logic [3:0] State, 
+	output logic [2:0] Counter
 	);
 	
 	// 8 Possible States 
 	//                 000     001    010   011   100    101         110      111
-	enum logic [2:0] {START, LOAD_B, INIT, SHIFT, ADD, SUBTRACT, LAST_SHIFT, DONE} curr_state, next_state; 
+	enum logic [3:0] {START, LOAD_B, INIT, SHIFT, WAIT, ADD, SUBTRACT, LAST_SHIFT, DONE} curr_state, next_state; 
 	
 	// Next State
 	always_ff @ (posedge Clk)
@@ -19,7 +21,8 @@ module control_unit (
 	// Counter State Transitions
 	logic [2:0] C;
 	logic [2:0] next_C;
-	
+	assign State = curr_state;
+	assign Counter = C;
 	always_ff @ (posedge Clk)
 	begin
 		if (Reset_Load_Clear)
@@ -92,7 +95,9 @@ module control_unit (
 								end
 								
 				// Shift_En for Both Register A and B
-            SHIFT :     if (C != 3'b111)
+            SHIFT :     next_state = WAIT;
+								
+				WAIT: 		if (C != 3'b111)
 								begin
 									if (M)
 									begin
@@ -172,6 +177,17 @@ module control_unit (
 				LoadA = 1'b0;
 				LoadB = 1'b0;
 				Shift_En = 1'b1;
+				Add_Signal = 1'b1;
+				A_rst = 1'b0;
+				B_rst = 1'b0;
+				X_rst = 1'b0;
+			end
+			
+			WAIT: 
+			begin
+				LoadA = 1'b0;
+				LoadB = 1'b0;
+				Shift_En = 1'b0;
 				Add_Signal = 1'b1;
 				A_rst = 1'b0;
 				B_rst = 1'b0;

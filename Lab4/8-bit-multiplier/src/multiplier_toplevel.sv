@@ -9,7 +9,9 @@ module multiplier_toplevel (
 								HEX3,
 	output logic [7:0]   Aval, 
 								Bval,
-	output logic 			Xval
+	output logic 			Xval,
+	output logic [2:0]   State,
+								Counter
 	);
 	
 	// Asynchronous Inputs: {Reset_Load_Clear, Run_Sync, [7:0] SW_Sync}
@@ -72,7 +74,9 @@ module multiplier_toplevel (
 								  );
 							
 	// Control Unit Instantiation
-	
+	logic [2:0] state, counter;
+	assign State = state;
+	assign Counter = counter;
 	control_unit   FSM(.Clk(Clk), 
 							 .Reset_Load_Clear(Reset_Load_Clear_S), 
 							 .Run(Run_S), 
@@ -83,7 +87,9 @@ module multiplier_toplevel (
 							 .Add_Signal(Add_Signal),
 							 .A_rst(A_rst), 
 							 .B_rst(B_rst), 
-							 .X_rst(X_rst)
+							 .X_rst(X_rst),
+							 .State(state),
+							 .Counter(counter)
 							 );
 	
 	// Hex Driver Instantiation
