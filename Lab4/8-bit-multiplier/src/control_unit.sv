@@ -57,7 +57,7 @@ module control_unit (
 			3'b110 : if (next_state == SHIFT) 
 							next_C = 3'b111;
 							
-			3'b111 : if (next_state == SHIFT) 
+			3'b111 : if (next_state == INIT) 
 							next_C = 3'b000;
 		endcase
 	end
