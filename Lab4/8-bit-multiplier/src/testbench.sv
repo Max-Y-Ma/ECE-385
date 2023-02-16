@@ -30,8 +30,8 @@ logic Xval;
 logic [2:0] State, Counter;
 
 initial begin: SIGNAL_INITIALIZATION
-#1 Reset_Load_Clear = 1'b0;
-	Run = 1'b0;
+#1 Reset_Load_Clear = 1'b1;
+	Run = 1'b1;
 	SW = 7'b0000000;
 end
 
@@ -53,16 +53,14 @@ multiplier_toplevel UUT(.Clk(Clk),
 
 initial begin: TESTS
 // Test 1: Normal Test
-#2 SW = 8'hC5;
+#2 SW = 8'h01;			// B
 	Reset_Load_Clear = 1'b0;
 	
-#8 Run = 1'b0;
-	Reset_Load_Clear = 1'b1;
+#8 Reset_Load_Clear = 1'b1;
 	
-#4 SW = 8'h07;
+#4 SW = 8'h01;       // A
 
-#2 Run = 1'b1;
-	Reset_Load_Clear = 1'b0;
+#2 Run = 1'b0;
 	
 #50 if (Xval != 1'b1 && Aval != 8'hFE && Bval != 8'h63)
 			ErrorCnt++;
