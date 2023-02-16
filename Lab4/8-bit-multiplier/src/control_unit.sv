@@ -7,7 +7,7 @@ module control_unit (
 	
 	// 8 Possible States 
 	//                 000     001    010   011   100    101         110      111
-	enum logic [3:0] {START, LOAD_B, INIT, SHIFT, WAIT, ADD, SUBTRACT, LAST_SHIFT, DONE} curr_state, next_state; 
+	enum logic [3:0] {START, LOAD_B, INIT, SHIFT, WAIT, ADD, SUBTRACT, LAST_SHIFT, HOLD, DONE} curr_state, next_state; 
 	
 	// Next State
 	always_ff @ (posedge Clk)
@@ -120,7 +120,14 @@ module control_unit (
 				// ADD_SIGNAL = 0
 				SUBTRACT :	next_state = LAST_SHIFT;
 				
-				LAST_SHIFT : next_state = DONE;
+				LAST_SHIFT : next_state = HOLD;
+				
+				HOLD : 		if (Run)
+								begin
+									next_state = HOLD;
+								end else begin
+									next_state = DONE;
+								end
 				
 				// Loop back to LOAD_B or INIT and Final SHIFT
 				DONE :  		if (Reset_Load_Clear)
@@ -237,6 +244,18 @@ module control_unit (
 				LoadX = 1'b0;
 				Shift_En = 1'b1;
 				Add_Signal = 1'b0;
+				A_rst = 1'b0;
+				B_rst = 1'b0;
+				X_rst = 1'b0;
+			end
+			
+			HOLD:
+			begin
+				LoadA = 1'b0;
+				LoadB = 1'b0;
+				LoadX = 1'b0;
+				Shift_En = 1'b0;
+				Add_Signal = 1'b1;
 				A_rst = 1'b0;
 				B_rst = 1'b0;
 				X_rst = 1'b0;
