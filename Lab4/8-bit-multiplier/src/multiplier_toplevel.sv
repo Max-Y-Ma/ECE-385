@@ -22,27 +22,32 @@ module multiplier_toplevel (
 	synchronizer SW_Sync[7:0](.Clk(Clk), .d(SW[7:0]), .q(SW_S[7:0]));
 
 	// Internal Logic
-	logic M;							// Input to FSM
-	logic A_rst, B_rst;			// Output Controlled by FSM
-	logic Ld_A, Ld_B;				// Output Controlled by FSM
-	logic Shift_En;				// Output Controlled by FSM
-	logic Add_Signal;				// Output Controlled by FSM
+	logic M;								// Input to FSM
+	logic A_rst, B_rst, X_rst;		// Output Controlled by FSM
+	logic LoadA, LoadB;				// Output Controlled by FSM
+	logic Shift_En;					// Output Controlled by FSM
+	logic Add_Signal;					// Output Controlled by FSM
 	
-	logic [8:0] Adder_Out;		// Output of Adder
+	logic [8:0] Adder_Out;			// Output of Adder
 	
-	logic A_LSB;					// LSB of Register A
+	logic A_LSB;						// LSB of Register A
 	
 	// X: Signed Bit of Multiplication Result
 	always_ff @ (posedge Clk)
 	begin
-		Xval <= Adder_Out[8];
+		if (X_rst) 
+		begin
+			Xval <= 1'b0;
+		end else begin
+			Xval <= Adder_Out[8];
+		end
 	end
 	
 	// Register Instantiation	
 	reg_8 			reg_A(.Clk(Clk), 
 								.Reset(A_rst), 
 								.Shift_In(Xval), 
-								.Load(Ld_A), 
+								.Load(LoadA), 
 								.Shift_En(Shift_En), 
 								.Data_In(Adder_Out[7:0]), 
 								.Shift_Out(A_LSB), 
@@ -52,7 +57,7 @@ module multiplier_toplevel (
 	reg_8 			reg_B(.Clk(Clk), 
 								.Reset(B_rst), 
 								.Shift_In(A_LSB), 
-								.Load(Ld_B), 
+								.Load(LoadB), 
 								.Shift_En(Shift_En), 
 								.Data_In(SW_S[7:0]), 
 								.Shift_Out(M), 
@@ -61,13 +66,25 @@ module multiplier_toplevel (
 							
 	// Adder Unit Instantiation
 	adder_unit 		adder_9(.A(Aval[7:0]), 
-								  .SW(SW[7:0]),
+								  .SW(SW_S[7:0]),
 								  .Add_Signal(Add_Signal),
 								  .Adder_Out(Adder_Out)
 								  );
 							
 	// Control Unit Instantiation
 	
+	control_unit   FSM(.Clk(Clk), 
+							 .Reset_Load_Clear(Reset_Load_Clear_S), 
+							 .Run(Run_S), 
+							 .M(M),
+							 .LoadA(LoadA), 
+							 .LoadB(LoadB), 
+							 .Shift_En(Shift_En), 
+							 .Add_Signal(Add_Signal),
+							 .A_rst(A_rst), 
+							 .B_rst(B_rst), 
+							 .X_rst(X_rst)
+							 );
 	
 	// Hex Driver Instantiation
 	hex_driver HexAUpper(.In0(Aval[7:4]), .Out0(HEX3[6:0]));
