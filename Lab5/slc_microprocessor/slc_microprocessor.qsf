@@ -116,3 +116,6 @@ set_location_assignment PIN_A13 -to SW[6]
 set_location_assignment PIN_A14 -to SW[7]
 set_location_assignment PIN_B14 -to SW[8]
 set_location_assignment PIN_F15 -to SW[9]
+set_global_assignment -name SYSTEMVERILOG_FILE src/HexDriver.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/datapath.sv
+set_global_assignment -name QIP_FILE src/ram.qip

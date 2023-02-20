@@ -110,7 +110,7 @@ package SLC3_2;
       opINC[ 4: 0] = 1;
    endfunction
    
-   // opDEC(DR): same as DR <- DR - 1
+   // opINC(DR): same as DR <- DR - 1
    function [15:0] opDEC ( input [2:0] DR );
       opDEC[15:12] = op_ADD;
       opDEC[11: 9] = DR;

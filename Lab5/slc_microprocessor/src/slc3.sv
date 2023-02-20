@@ -30,14 +30,11 @@ module slc3(
 
 
 // An array of 4-bit wires to connect the hex_drivers efficiently to wherever we want
-// For Lab 1, they will direclty be connected to the IR register through an always_comb circuit
+// For Lab 1, they will directly be connected to the IR register through an always_comb circuit
 // For Lab 2, they will be patched into the MEM2IO module so that Memory-mapped IO can take place
-logic [3:0] hex_4[3:0]; 
-//HexDriver hex_drivers[3:0] (hex_4, {HEX3, HEX2, HEX1, HEX0});
+logic [3:0] hex_4 [3:0]; 
+HexDriver hex_drivers[3:0] (hex_4, {HEX3, HEX2, HEX1, HEX0});
 // This works thanks to http://stackoverflow.com/questions/1378159/verilog-can-we-have-an-array-of-custom-modules
-
-
-
 
 // Internal connections
 logic LD_MAR, LD_MDR, LD_IR, LD_BEN, LD_CC, LD_REG, LD_PC, LD_LED;
@@ -48,6 +45,8 @@ logic [1:0] PCMUX, ADDR2MUX, ALUK;
 logic [15:0] MDR_In;
 logic [15:0] MAR, MDR, IR;
 
+// PC?
+
 
 // Connect MAR to ADDR, which is also connected as an input into MEM2IO
 //	MEM2IO will determine what gets put onto Data_CPU (which serves as a potential
@@ -55,7 +54,7 @@ logic [15:0] MAR, MDR, IR;
 assign ADDR = MAR; 
 assign MIO_EN = OE;
 // Connect everything to the data path (you have to figure out this part)
-//datapath d0 (.*);
+datapath d0 (.*);
 
 // Our SRAM and I/O controller (note, this plugs into MDR/MAR)
 
