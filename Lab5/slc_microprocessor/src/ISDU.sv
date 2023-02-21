@@ -15,6 +15,8 @@
 //    Spring 2017 Distribution
 //------------------------------------------------------------------------------
 
+// 3 WAIT STATESSSSSS
+
 module ISDU (   
 	input logic				Clk, 
 								Reset,
