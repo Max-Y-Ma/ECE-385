@@ -1,5 +1,5 @@
 module register_file (
-	input logic [15:0] REG_IN, IR,
+	input logic [15:0] BUS, IR,
 	input logic SR1MUX, DRMUX, LD_REG,
 	output logic [15:0] SR1_OUT, SR2_OUT
 );
@@ -27,18 +27,18 @@ module register_file (
 	
 	assign SR2 = IR[2:0];
 	
-	// Store REG_IN to DR 
+	// Store BUS to DR 
 	always_ff @ (posedge LD_REG)
 	begin
 		case (DR)
-			3'b000 : Reg[0] = REG_IN;
-			3'b001 : Reg[1] = REG_IN;
-			3'b010 : Reg[2] = REG_IN;
-			3'b011 : Reg[3] = REG_IN;
-			3'b100 : Reg[4] = REG_IN;
-			3'b101 : Reg[5] = REG_IN;
-			3'b110 : Reg[6] = REG_IN;
-			3'b111 : Reg[7] = REG_IN;
+			3'b000 : Reg[0] = BUS;
+			3'b001 : Reg[1] = BUS;
+			3'b010 : Reg[2] = BUS;
+			3'b011 : Reg[3] = BUS;
+			3'b100 : Reg[4] = BUS;
+			3'b101 : Reg[5] = BUS;
+			3'b110 : Reg[6] = BUS;
+			3'b111 : Reg[7] = BUS;
 		endcase
 	end
 	
