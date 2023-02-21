@@ -64,6 +64,7 @@ Mem2IO memory_subsystem(
 );
 
 // State machine, you need to fill in the code here as well
+// ADD BEN
 ISDU state_controller(
 	.*, .Reset(Reset), .Run(Run), .Continue(Continue),
 	.Opcode(IR[15:12]), .IR_5(IR[5]), .IR_11(IR[11]),
