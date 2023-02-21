@@ -32,8 +32,16 @@ module slc3(
 // An array of 4-bit wires to connect the hex_drivers efficiently to wherever we want
 // For Lab 1, they will directly be connected to the IR register through an always_comb circuit
 // For Lab 2, they will be patched into the MEM2IO module so that Memory-mapped IO can take place
-logic [3:0] hex_4 [3:0]; 
-HexDriver hex_drivers[3:0] (hex_4, {HEX3, HEX2, HEX1, HEX0});
+
+
+logic [3:0] hex_4 [3:0]; //Uncomment
+
+
+//assign hex_4 = IR;		
+
+
+
+HexDriver hex_drivers[3:0] (IR, {HEX3, HEX2, HEX1, HEX0});		//hex4
 // This works thanks to http://stackoverflow.com/questions/1378159/verilog-can-we-have-an-array-of-custom-modules
 
 // Internal connections

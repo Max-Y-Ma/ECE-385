@@ -10,7 +10,7 @@ module datapath(
 );
 
 	// Local Signals
-	logic [15:0] PC, BUS, REG_IN, ALU_OUT, SR1_OUT, SR2_OUT, SR2MUX_OUT;
+	logic [15:0] PC, BUS, REG_IN, ALU_OUT, SR1_OUT, SR2_OUT, SR2MUX_OUT, PC_MUX_OUT;
 	
 	// Bus Load
 	always_comb
@@ -28,48 +28,55 @@ module datapath(
 		endcase
 	end
 	
-	// Bus Store
 	
 	// Register File
+	assign REG_IN = BUS;
 	register_file RegFile(.*);
 	
 	// ALU
 	ALU ALU(.A(SR1_OUT), .B(SR2MUX_OUT), .*);
 	
 	
-//	always_comb // BUS_STORE
-//	begin
-//		if(LD_MAR)
-//			MAR = BUS;
-//		else
-//			MAR = MAR;
-//			
-//		if(LD_MDR)
-//		begin
-//			unique case (MIO_EN)
-//				1'b0 : MDR = BUS;
-//				1'b1 : MDR = MDR_In;
-//			endcase
-//		end
-//		
-//		if (LD_IR)
-//			IR = BUS;
-//			
-//		if (LD_BEN)
-//			// Determine Logic: Does cc match IR[x:x]?
-//		
-//		if (LD_CC)
-//			// Determine Logic: Check MSB of BUS?
-//			
-//		if (LD_REG)
-//			REG_IN = BUS;
-//			
-//		if (LD_PC)
-//			PC = BUS;
-//		
-////		if (LD_LED)
-////			// Week 2
-//		
-//	end
+	
+	always_ff @ (posedge LD_MAR)
+	begin
+		MAR = BUS;
+	end
+	
+	always_ff @ (posedge LD_MDR)
+	begin
+		unique case(MIO_EN)
+			1'b0 : MDR = BUS;
+			1'b1 : MDR = MDR_In;
+		endcase
+	end
+	
+	always_ff @ (posedge LD_IR)
+	begin
+		IR = BUS;
+	end
+	
+	always_ff @ (posedge LD_PC)
+	begin
+		PC = PC_MUX_OUT;
+	end
+	
+	always_comb
+	begin
+		unique case(PCMUX)
+			2'b00 : PC_MUX_OUT = PC + 16'h0001;
+			2'b01 : PC_MUX_OUT = BUS;
+			2'b10 : PC_MUX_OUT = 16'h0000;		//should be address adder output
+			default : PC_MUX_OUT = 16'h0000;
+		endcase
+	end
+	
+	always_comb
+	begin
+		unique case(SR2MUX)
+			1'b0 : SR2MUX_OUT = SR2_OUT;
+			1'b1 : SR2MUX_OUT = {{11{IR[4]}}, IR[4:0] };
+		endcase
+	end
 	
 endmodule
