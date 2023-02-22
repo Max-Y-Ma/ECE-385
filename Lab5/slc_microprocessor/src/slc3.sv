@@ -28,30 +28,23 @@ module slc3(
 	output logic [15:0] Data_to_SRAM
 );
 
+// Internal connections
+logic LD_MAR, LD_MDR, LD_IR, LD_BEN, LD_CC, LD_REG, LD_PC, LD_LED;
+logic GatePC, GateMDR, GateALU, GateMARMUX;
+logic SR2MUX, ADDR1MUX;
+logic BEN, MIO_EN, DRMUX, SR1MUX;
+logic [1:0] PCMUX, ADDR2MUX, ALUK;
+logic [15:0] MDR_In;
+logic [15:0] MAR, MDR, IR;
+logic [15:0] PC, BUS;
 
 // An array of 4-bit wires to connect the hex_drivers efficiently to wherever we want
 // For Lab 1, they will directly be connected to the IR register through an always_comb circuit
 // For Lab 2, they will be patched into the MEM2IO module so that Memory-mapped IO can take place
 
-
 logic [3:0] hex_4 [3:0]; //Uncomment
-
-
-//assign hex_4 = IR;		
-
-
-
-HexDriver hex_drivers[3:0] (IR, {HEX3, HEX2, HEX1, HEX0});		//hex4
+HexDriver hex_drivers[3:0] (IR, {HEX3, HEX2, HEX1, HEX0});		//hex_4
 // This works thanks to http://stackoverflow.com/questions/1378159/verilog-can-we-have-an-array-of-custom-modules
-
-// Internal connections
-logic LD_MAR, LD_MDR, LD_IR, LD_BEN, LD_CC, LD_REG, LD_PC, LD_LED;
-logic GatePC, GateMDR, GateALU, GateMARMUX;
-logic SR2MUX, ADDR1MUX, MARMUX;
-logic BEN, MIO_EN, DRMUX, SR1MUX;
-logic [1:0] PCMUX, ADDR2MUX, ALUK;
-logic [15:0] MDR_In;
-logic [15:0] MAR, MDR, IR;
 
 
 // Connect MAR to ADDR, which is also connected as an input into MEM2IO

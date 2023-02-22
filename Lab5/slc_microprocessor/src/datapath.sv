@@ -1,12 +1,14 @@
 module reg_16(
-	input [15:0] D,
+	input logic Clk,
+	input logic [15:0] D,
 	input logic Load,
 	output logic [15:0] Q
 );
 	// Standard 16-bit Register
-	always_ff @ (posedge Load)
+	always_ff @ (negedge Clk)
 	begin
-		Q = D;
+		if (Load)
+			Q <= D;
 	end
 
 endmodule
@@ -21,6 +23,8 @@ module bus_gate(
 	always_comb
 	begin
 		unique case({GatePC, GateMDR, GateALU, GateMARMUX})
+			4'b0000 : BUS = 16'h1234;
+		
 			4'b1000 : BUS = PC;
 			
 			4'b0100 : BUS = MDR;
@@ -57,21 +61,28 @@ endmodule
 
 
 module datapath(
+	input logic Clk,
 	input logic LD_MAR, LD_MDR, LD_IR, LD_BEN, LD_CC, LD_REG, LD_PC, LD_LED,
 	input logic GatePC, GateMDR, GateALU, GateMARMUX,
-	input logic SR2MUX, ADDR1MUX, MARMUX,
+	input logic SR2MUX, ADDR1MUX,
 	input logic MIO_EN, DRMUX, SR1MUX,
 	input logic [1:0] PCMUX, ADDR2MUX, ALUK,
 	input logic [15:0] MDR_In,
 	output logic [15:0] MAR, MDR, IR,
+	output logic [15:0] PC, BUS,
 	output logic BEN
 );
 	///////////////////
 	// Local Signals //
 	///////////////////
 	
-	logic [15:0] PC, BUS, ALU_OUT, SR1_OUT, SR2_OUT;
+	logic [15:0] ALU_OUT, SR1_OUT, SR2_OUT; //PC, BUS, 
 	logic [15:0] MDR_MUX, SR2_MUX, PC_MUX;
+	
+	initial
+	begin
+		PC = 16'h000F;
+	end
 	
 	//////////////////
 	// Simple MUXes //
@@ -112,12 +123,12 @@ module datapath(
 	ALU ALU(.A(SR1_OUT), .B(SR2_MUX), .*);
 	
 	// Datapath Registers
-	reg_16 MAR_(.D(BUS), .Load(LD_MAR), .Q(MAR));
+	reg_16 MAR_(.Clk(Clk), .D(BUS), .Load(LD_MAR), .Q(MAR));
 	
-	reg_16 MDR_(.D(MDR_MUX), .Load(LD_MDR), .Q(MDR));
+	reg_16 MDR_(.Clk(Clk), .D(MDR_MUX), .Load(LD_MDR), .Q(MDR));
 	
-	reg_16 IR_(.D(BUS), .Load(LD_IR), .Q(IR));
+	reg_16 IR_(.Clk(Clk), .D(BUS), .Load(LD_IR), .Q(IR));
 	
-	reg_16 PC_(.D(PC_MUX), .Load(LD_PC), .Q(PC));
+	reg_16 PC_(.Clk(Clk), .D(PC_MUX), .Load(LD_PC), .Q(PC));
 	
 endmodule
