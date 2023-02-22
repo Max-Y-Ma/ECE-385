@@ -27,7 +27,6 @@ logic [3:0]  	Opcode;
 logic         	IR_5;
 logic         	IR_11;
 logic         	BEN;
-logic [15:0] 	MDR_In;
 
 // Output Signals
 logic   			LD_MAR, LD_MDR, LD_IR, LD_BEN, LD_CC, LD_REG, LD_PC, LD_LED;
@@ -39,6 +38,7 @@ logic        	DRMUX, SR1MUX, SR2MUX, ADDR1MUX;
 logic [1:0]  	ADDR2MUX, ALUK;
 
 logic [15:0] 	MAR, MDR, IR, PC, BUS;
+logic [15:0] 	MDR_In;
 				  
 logic       	Mem_OE, Mem_WE;
 
@@ -53,13 +53,19 @@ initial begin: SIGNAL_INITIALIZATION
 	IR_5 = 1'b0;
 	IR_11 = 1'b0;
 	BEN = 1'b0;
-	MDR_In = 16'h1111;
 end
 
 // Unit Under Test
 
 datapath UUT(.*);
 ISDU UUT2(.*);
+test_memory mem(.Reset(Reset), 
+					 .Clk(Clk), 
+					 .data(MDR), 
+					 .address(MAR[9:0]), 
+					 .rden(Mem_OE), 
+					 .wren(Mem_WE), 
+					 .readout(MDR_In));
 
 initial begin: TESTS
 // Test 1: Normal Test

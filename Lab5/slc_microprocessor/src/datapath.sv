@@ -23,8 +23,6 @@ module bus_gate(
 	always_comb
 	begin
 		unique case({GatePC, GateMDR, GateALU, GateMARMUX})
-			4'b0000 : BUS = 16'h1234;
-		
 			4'b1000 : BUS = PC;
 			
 			4'b0100 : BUS = MDR;
@@ -81,7 +79,7 @@ module datapath(
 	
 	initial
 	begin
-		PC = 16'h000F;
+		PC = 16'h0000;
 	end
 	
 	//////////////////
