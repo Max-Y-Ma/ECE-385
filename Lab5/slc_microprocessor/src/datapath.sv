@@ -9,6 +9,7 @@ module reg_16(
 	begin
 		if (Load)
 			Q <= D;
+//		else if (
 	end
 
 endmodule
@@ -31,7 +32,7 @@ module bus_gate(
 			
 			4'b0001 : BUS = MAR_MUX;		//week 2
 			
-			default: BUS = 16'hFFFF;		//Something went wrong - BUS heavy
+			default: BUS = 16'hx;		//Something went wrong - BUS heavy
 		endcase
 	end
 	
@@ -87,6 +88,53 @@ module addr1mux(
 	end
 endmodule
 
+module cc(
+	input logic [15:0] BUS,
+	input logic LD_CC, Clk,
+	output logic [2:0] CC
+);
+	logic [2:0] newCC;
+	always_ff @ (negedge Clk)
+	begin
+		if(LD_CC)
+			CC <= newCC;
+	end
+	
+	always_comb
+	begin
+		if(BUS[15] == 1'b1)
+			newCC = 3'b100;
+		else if(BUS == 16'h0000)
+			newCC = 3'b010;
+		else
+			newCC = 3'b001;
+	end
+	
+endmodule
+
+module benny(
+	input logic [15:0] IR,
+	input logic [2:0] CC,
+	input logic Clk, LD_BEN,
+	output logic BEN
+);
+
+	logic newBEN;
+	
+	always_ff @ (negedge Clk)
+	begin
+		if(LD_BEN)
+			BEN <= newBEN;
+	end
+	
+	always_comb
+	begin
+		newBEN = IR[11] & CC[2] + IR[10] & CC[1] + IR[9] & CC[0] ;
+	end
+
+
+endmodule
+
 module datapath(
 	input logic Clk,
 	input logic LD_MAR, LD_MDR, LD_IR, LD_BEN, LD_CC, LD_REG, LD_PC, LD_LED,
@@ -105,6 +153,7 @@ module datapath(
 	
 	logic [15:0] ALU_OUT, SR1_OUT, SR2_OUT; //PC, BUS, 
 	logic [15:0] MDR_MUX, SR2_MUX, PC_MUX, MAR_MUX, ADDR1_MUX, ADDR2_MUX;
+	logic [2:0] CC;
 	
 	initial
 	begin
@@ -159,6 +208,12 @@ module datapath(
 	
 	// ADDR1MUX
 	addr1mux ADDR1MUX_(.*);
+	
+	//SetCC
+	cc CC_(.*);
+	
+	//BEN logic
+	benny BENNY_(.*);
 	
 	// Datapath Registers
 	reg_16 MAR_(.Clk(Clk), .D(BUS), .Load(LD_MAR), .Q(MAR));
