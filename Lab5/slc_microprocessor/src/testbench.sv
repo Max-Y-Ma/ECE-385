@@ -42,6 +42,11 @@ logic [15:0] 	MDR_In;
 				  
 logic       	Mem_OE, Mem_WE;
 
+logic [3:0] curr_state, next_state;
+
+assign curr_state = UUT2.State;
+assign next_state = UUT2.Next_state;
+
 logic MIO_EN;
 assign MIO_EN = Mem_OE;
 

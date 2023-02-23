@@ -1,5 +1,5 @@
 module reg_16(
-	input logic Clk,
+	input logic Clk, Reset,
 	input logic [15:0] D,
 	input logic Load,
 	output logic [15:0] Q
@@ -7,9 +7,10 @@ module reg_16(
 	// Standard 16-bit Register
 	always_ff @ (negedge Clk)
 	begin
-		if (Load)
+		if (Reset)
+			Q <= 16'h0000;
+		else if (Load)
 			Q <= D;
-//		else if (
 	end
 
 endmodule
@@ -129,14 +130,14 @@ module benny(
 	
 	always_comb
 	begin
-		newBEN = IR[11] & CC[2] + IR[10] & CC[1] + IR[9] & CC[0] ;
+		newBEN = (IR[11] & CC[2]) | (IR[10] & CC[1]) | (IR[9] & CC[0]) ;
 	end
 
 
 endmodule
 
 module datapath(
-	input logic Clk,
+	input logic Clk, Reset,
 	input logic LD_MAR, LD_MDR, LD_IR, LD_BEN, LD_CC, LD_REG, LD_PC, LD_LED,
 	input logic GatePC, GateMDR, GateALU, GateMARMUX,
 	input logic SR2MUX, ADDR1MUX,
@@ -216,12 +217,12 @@ module datapath(
 	benny BENNY_(.*);
 	
 	// Datapath Registers
-	reg_16 MAR_(.Clk(Clk), .D(BUS), .Load(LD_MAR), .Q(MAR));
+	reg_16 MAR_(.Clk(Clk), .Reset(Reset), .D(BUS), .Load(LD_MAR), .Q(MAR));
 	
-	reg_16 MDR_(.Clk(Clk), .D(MDR_MUX), .Load(LD_MDR), .Q(MDR));
+	reg_16 MDR_(.Clk(Clk), .Reset(Reset), .D(MDR_MUX), .Load(LD_MDR), .Q(MDR));
 	
-	reg_16 IR_(.Clk(Clk), .D(BUS), .Load(LD_IR), .Q(IR));
+	reg_16 IR_(.Clk(Clk), .Reset(Reset), .D(BUS), .Load(LD_IR), .Q(IR));
 	
-	reg_16 PC_(.Clk(Clk), .D(PC_MUX), .Load(LD_PC), .Q(PC));
+	reg_16 PC_(.Clk(Clk), .Reset(Reset), .D(PC_MUX), .Load(LD_PC), .Q(PC));
 	
 endmodule
