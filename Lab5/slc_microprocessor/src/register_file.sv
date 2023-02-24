@@ -29,7 +29,7 @@ module register_file (
 	assign SR2 = IR[2:0];
 	
 	// Store BUS to DR 
-	always_ff @ (negedge Clk)
+	always_ff @ (posedge Clk)
 	begin
 		if (LD_REG)
 		begin

@@ -60,7 +60,7 @@ module Instantiateram( input Reset,
 		  next_state = state;
 		  
 		  unique case(state)
-		  idle: ;
+		  idle: next_state = mem_write;
 		  mem_write: begin
 			  if(address == 16'hff)
 					next_state = done;
@@ -68,7 +68,7 @@ module Instantiateram( input Reset,
 					next_state = mem_write;
 				end
 		  done:
-				next_state = idle;
+				next_state = done;
 
 		 endcase
 		 

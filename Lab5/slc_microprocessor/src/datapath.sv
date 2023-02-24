@@ -5,7 +5,7 @@ module reg_16(
 	output logic [15:0] Q
 );
 	// Standard 16-bit Register
-	always_ff @ (negedge Clk)
+	always_ff @ (posedge Clk)
 	begin
 		if (Reset)
 			Q <= 16'h0000;
@@ -31,9 +31,9 @@ module bus_gate(
 			
 			4'b0010 : BUS = ALU_OUT;
 			
-			4'b0001 : BUS = MAR_MUX;		//week 2
+			4'b0001 : BUS = MAR_MUX;
 			
-			default: BUS = 16'hx;		//Something went wrong - BUS heavy
+			default: BUS = 16'hx;
 		endcase
 	end
 	
@@ -95,7 +95,7 @@ module cc(
 	output logic [2:0] CC
 );
 	logic [2:0] newCC;
-	always_ff @ (negedge Clk)
+	always_ff @ (posedge Clk)
 	begin
 		if(LD_CC)
 			CC <= newCC;
@@ -122,7 +122,7 @@ module benny(
 
 	logic newBEN;
 	
-	always_ff @ (negedge Clk)
+	always_ff @ (posedge Clk)
 	begin
 		if(LD_BEN)
 			BEN <= newBEN;

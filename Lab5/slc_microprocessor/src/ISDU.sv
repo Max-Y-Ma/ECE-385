@@ -58,7 +58,9 @@ module ISDU (
 	enum logic [3:0] { 	Halted, 
 								PauseIR1, 
 								PauseIR2, 
-								S_18, 
+								S_18,
+								S_18_WAIT1,
+								S_18_WAIT2,
 								S_33_1, 
 								S_33_2, 
 								S_35, 
@@ -112,9 +114,11 @@ module ISDU (
 				if (Run) 
 					Next_state = S_18;                      
 			S_18 : 
+				Next_state = S_18_WAIT1;
+			S_18_WAIT1 :
+				Next_state = S_18_WAIT2;
+			S_18_WAIT2 :
 				Next_state = S_33_1;
-			// Any states involving SRAM require more than one clock cycles.
-			// The exact number will be discussed in lecture.
 			S_33_1 : 
 				Next_state = S_33_2;
 			S_33_2 : 
@@ -162,8 +166,12 @@ module ISDU (
 					PCMUX = 2'b00;
 					LD_PC = 1'b1;
 				end
-			S_33_1 : 
+			S_18_WAIT1 : 
 				Mem_OE = 1'b1;
+			S_18_WAIT1 : 
+				Mem_OE = 1'b1; 	// Probabilty Can Remove
+			S_33_1 : 
+				Mem_OE = 1'b1;	// Probabilty Can Remove
 			S_33_2 : 
 				begin 
 					Mem_OE = 1'b1;
