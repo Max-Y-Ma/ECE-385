@@ -61,7 +61,6 @@ slc3 slc(.Reset(Reset_ah), .Continue(Continue_ah), .Run(Run_ah), .WE(we_from_ISD
 
 Instantiateram instaRam(.Clk(Clk), .Reset(Reset_ah),.ADDR(init_ADDR), .data(init_data), .wren(we_select));
 
-//This is the physical on-chip memory, consult the documentation regarding Megafunctions for a tutorial on how to generate this.
 ram ram0(.address(ADDR[9:0]), .clock(Clk), .data(Data_to_SRAM),  .rden(OE), .wren(WE), .q(Data_from_SRAM)); 
 
 endmodule

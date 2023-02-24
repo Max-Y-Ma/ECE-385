@@ -5,12 +5,12 @@ module reg_16(
 	output logic [15:0] Q
 );
 	// Standard 16-bit Register
-	always_ff @ (posedge Clk)
+	always_ff @ (negedge Clk)
 	begin
-		if (Reset)
-			Q <= 16'h0000;
-		else if (Load)
+		if (Load)
 			Q <= D;
+		else if (Reset)
+			Q <= 16'h0000;
 	end
 
 endmodule
@@ -95,7 +95,7 @@ module cc(
 	output logic [2:0] CC
 );
 	logic [2:0] newCC;
-	always_ff @ (posedge Clk)
+	always_ff @ (negedge Clk)
 	begin
 		if(LD_CC)
 			CC <= newCC;
@@ -122,7 +122,7 @@ module benny(
 
 	logic newBEN;
 	
-	always_ff @ (posedge Clk)
+	always_ff @ (negedge Clk)
 	begin
 		if(LD_BEN)
 			BEN <= newBEN;
@@ -184,7 +184,7 @@ module datapath(
 	begin
 		unique case(SR2MUX)
 			1'b0 : SR2_MUX = SR2_OUT;
-			1'b1 : SR2_MUX = {{11{IR[4]}}, IR[4:0] };
+			1'b1 : SR2_MUX = {{11{IR[4]}}, IR[4:0]};
 		endcase
 	end
 	

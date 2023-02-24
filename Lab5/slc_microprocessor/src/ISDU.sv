@@ -59,10 +59,9 @@ module ISDU (
 								PauseIR1, 
 								PauseIR2, 
 								S_18,
-								S_18_WAIT1,
-								S_18_WAIT2,
-								S_33_1, 
-								S_33_2, 
+								S_33_1,
+								S_33_2,
+								S_33_3, 
 								S_35, 
 								S_32, 
 								S_01}   State, Next_state;
@@ -114,19 +113,15 @@ module ISDU (
 				if (Run) 
 					Next_state = S_18;                      
 			S_18 : 
-				Next_state = S_18_WAIT1;
-			S_18_WAIT1 :
-				Next_state = S_18_WAIT2;
-			S_18_WAIT2 :
 				Next_state = S_33_1;
 			S_33_1 : 
 				Next_state = S_33_2;
 			S_33_2 : 
+				Next_state = S_33_3;
+			S_33_3 :
 				Next_state = S_35;
 			S_35 : 
 				Next_state = PauseIR1;
-			// PauseIR1 and PauseIR2 are only for Week 1 such that TAs can see 
-			// the values in IR.
 			PauseIR1 : 
 				if (~Continue) 
 					Next_state = PauseIR1;
@@ -166,13 +161,11 @@ module ISDU (
 					PCMUX = 2'b00;
 					LD_PC = 1'b1;
 				end
-			S_18_WAIT1 : 
-				Mem_OE = 1'b1;
-			S_18_WAIT1 : 
-				Mem_OE = 1'b1; 	// Probabilty Can Remove
 			S_33_1 : 
-				Mem_OE = 1'b1;	// Probabilty Can Remove
+				Mem_OE = 1'b1;
 			S_33_2 : 
+				Mem_OE = 1'b1;
+			S_33_3 : 
 				begin 
 					Mem_OE = 1'b1;
 					LD_MDR = 1'b1;

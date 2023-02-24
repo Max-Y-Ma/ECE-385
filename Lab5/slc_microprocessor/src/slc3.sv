@@ -38,25 +38,16 @@ logic [15:0] MDR_In;
 logic [15:0] MAR, MDR, IR;
 logic [15:0] PC, BUS;
 
-// An array of 4-bit wires to connect the hex_drivers efficiently to wherever we want
-// For Lab 1, they will directly be connected to the IR register through an always_comb circuit
-// For Lab 2, they will be patched into the MEM2IO module so that Memory-mapped IO can take place
+logic [3:0] hex_4 [3:0];
+HexDriver hex_drivers[3:0] (IR, {HEX3, HEX2, HEX1, HEX0});
 
-logic [3:0] hex_4 [3:0]; //Uncomment
-HexDriver hex_drivers[3:0] (IR, {HEX3, HEX2, HEX1, HEX0});		//hex_4
-// This works thanks to http://stackoverflow.com/questions/1378159/verilog-can-we-have-an-array-of-custom-modules
-
-
-// Connect MAR to ADDR, which is also connected as an input into MEM2IO
-//	MEM2IO will determine what gets put onto Data_CPU (which serves as a potential
-//	input into MDR)
 assign ADDR = MAR; 
 assign MIO_EN = OE;
-// Connect everything to the data path (you have to figure out this part)
+
+// Datapath
 datapath d0 (.*);
 
-// Our SRAM and I/O controller (note, this plugs into MDR/MAR)
-
+// I/O controller
 Mem2IO memory_subsystem(
     .*, .Reset(Reset), .ADDR(ADDR), .Switches(SW),
     .HEX0(hex_4[0][3:0]), .HEX1(hex_4[1][3:0]), .HEX2(hex_4[2][3:0]), .HEX3(hex_4[3][3:0]),
@@ -64,8 +55,7 @@ Mem2IO memory_subsystem(
     .Data_from_SRAM(Data_from_SRAM), .Data_to_SRAM(Data_to_SRAM)
 );
 
-// State machine, you need to fill in the code here as well
-// ADD BEN
+// State Machine ***ADD BEN***
 ISDU state_controller(
 	.*, .Reset(Reset), .Run(Run), .Continue(Continue),
 	.Opcode(IR[15:12]), .IR_5(IR[5]), .IR_11(IR[11]),
