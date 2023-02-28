@@ -235,7 +235,7 @@ module ISDU (
 		
 		// Assign control signals based on current state
 		case (State)
-			Halted: ;
+			Halted: ;		//defaults
 			S_18 : 
 				begin 
 					GatePC = 1'b1;
@@ -268,11 +268,126 @@ module ISDU (
 					GateALU = 1'b1;
 					LD_REG = 1'b1;
 					// incomplete...
+					DRMUX = 1'b0;			//SR2 register value should be passed in via datapath
+					SR1MUX = 1'b1;
+					LD_CC = 1'b1;
+										
 				end
 
 			// You need to finish the rest of states.....
+			
+			S_05 :
+				begin
+					SR2MUX = IR_5;
+					ALUK = 2'b01;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;			//SR2 register value should be passed in via datapath
+					SR1MUX = 1'b1;
+					LD_CC = 1'b1;
+				end
+				
+			S_09 :
+				begin
+					SR1MUX = 1'b1;
+					ALUK = 2'b10;
+					GateALU = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					LD_CC = 1'b1;
+				end
+			
+			S_06:
+				begin
+					ADDR1MUX = 1'b1;
+					SR1MUX = 1'b1;
+					ADDR2MUX = 2'b01;
+					GateMARMUX = 1'b1;
+					LD_MAR = 1'b1;
+				end
+				
+			S_25_1:
+				Mem_OE = 1'b1;
+				
+			S_25_2:
+				Mem_OE = 1'b1;
+				
+			S_25_3:
+				begin
+					Mem_OE = 1'b1;
+					LD_MDR = 1'b1;
+				end
+				
+			S_27:
+				begin
+					GateMDR = 1'b1;
+					LD_REG = 1'b1;
+					DRMUX = 1'b0;
+					LD_CC = 1'b1;
+				end
+				
+			S_07:
+				begin
+					ADDR1MUX = 1'b1;
+					SR1MUX = 1'b1;
+					ADDR2MUX = 2'b01;
+					GateMARMUX = 1'b1;
+					LD_MAR = 1'b1;
+				end
+				
+			S_23:
+				begin
+					LD_MDR = 1'b1;
+					Mem_OE = 1'b0;		//BUS -> MDR
+					SR1MUX = 1'b0;
+					ALUK = 2'b11;
+					GateALU = 1'b1;
+				end
+				
+			S_16_1:						//all I have to do is WE right??
+				Mem_WE = 1'b1;
+					
+			S_16_2:
+				Mem_WE = 1'b1;
+				
+			S_16_3:
+				Mem_WE = 1'b1;
+				
+			S_04:
+				begin
+					DRMUX = 1'b1;
+					LD_REG = 1'b1;
+					GatePC = 1'b1;
+				end
+				
+			S_21:
+				begin
+					PCMUX = 2'b10;
+					LD_PC = 1'b1;
+					ADDR1MUX = 1'b0;
+					ADDR2MUX = 2'b11;
+				end
+				
+			S_12:
+				begin
+					LD_PC = 1'b1;
+					PCMUX = 2'b10;		//passing internally
+					ADDR2MUX = 2'b00;
+					ADDR1MUX = 1'b1;
+					SR1MUX = 1'b1;					
+				end
+				
+			S_00: ;						//BEN - do nothing
+			
+			S_22:
+				begin
+					PCMUX = 2'b10;
+					LD_PC = 1'b1;
+					ADDR1MUX = 1'b0;
+					ADDR2MUX = 2'b10;
+				end
 
-			default : ;
+			default : ;					//do nothing
 		endcase
 	end 
 

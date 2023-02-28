@@ -51,7 +51,7 @@ module pcmux(
 		unique case(PCMUX)
 			2'b00 : PC_MUX = PC + 16'h0001;
 			2'b01 : PC_MUX = BUS;
-			2'b10 : PC_MUX = MAR_MUX;		//should be address adder output
+			2'b10 : PC_MUX = MAR_MUX;		//net name for GateMARMUX wire
 			default : PC_MUX = 16'h0000;
 		endcase
 	end
