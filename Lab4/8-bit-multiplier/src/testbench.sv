@@ -52,7 +52,7 @@ multiplier_toplevel UUT(.Clk(Clk),
 								);
 
 initial begin: TESTS
-// Test 1: Normal Test
+// Test 1: Normal Test (++)
 #2 SW = 8'hC5;			// B
 	Reset_Load_Clear = 1'b0;
 	
@@ -65,7 +65,7 @@ initial begin: TESTS
 #50 if (Xval != 1'b1 && Aval != 8'hFE && Bval != 8'h63)
 			ErrorCnt++;
 			
-// Test 2: Normal Test
+// Test 2: Normal Test (--)
 #2 SW = 8'hFF;			// B
 	Reset_Load_Clear = 1'b0;
 	
@@ -78,13 +78,26 @@ initial begin: TESTS
 #50 if (Xval != 1'b0 && Aval != 8'h00 && Bval != 8'h01)
 			ErrorCnt++;
 			
-// Test 3: Normal Test
+// Test 3: Normal Test (-+)
 #2 SW = 8'h01;			// B
 	Reset_Load_Clear = 1'b0;
 	
 #8 Reset_Load_Clear = 1'b1;
 	
 #4 SW = 8'hFF;       // A
+
+#2 Run = 1'b0;
+	
+#50 if (Xval != 1'b1 && Aval != 8'hFF && Bval != 8'hFF)
+			ErrorCnt++;
+			
+// Test 3: Normal Test (+-)
+#2 SW = 8'hFF;			// B
+	Reset_Load_Clear = 1'b0;
+	
+#8 Reset_Load_Clear = 1'b1;
+	
+#4 SW = 8'h01;       // A
 
 #2 Run = 1'b0;
 	
