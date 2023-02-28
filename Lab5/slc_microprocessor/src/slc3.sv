@@ -55,7 +55,7 @@ Mem2IO memory_subsystem(
     .Data_from_SRAM(Data_from_SRAM), .Data_to_SRAM(Data_to_SRAM)
 );
 
-// State Machine ***ADD BEN***
+// State Machine ***ADD BEN*** - done
 ISDU state_controller(
 	.*, .Reset(Reset), .Run(Run), .Continue(Continue),
 	.Opcode(IR[15:12]), .IR_5(IR[5]), .IR_11(IR[11]),
