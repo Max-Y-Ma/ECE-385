@@ -54,7 +54,6 @@ initial begin: SIGNAL_INITIALIZATION
 #1 Run = 1'b1;
 	Continue = 1'b1;
 	Reset = 1'b1;
-	Opcode = 4'h0;
 	IR_5 = 1'b0;
 	IR_11 = 1'b0;
 	BEN = 1'b0;
@@ -62,8 +61,12 @@ end
 
 // Unit Under Test
 
+assign Opcode = IR[15:12];
+
 datapath UUT(.*);
-ISDU UUT2(.*);
+ISDU UUT2(
+	.*, .Opcode(Opcode), .IR_5(IR[5]), .IR_11(IR[11])
+);
 test_memory mem(.Reset(Reset), 
 					 .Clk(Clk), 
 					 .data(MDR), 
@@ -71,6 +74,16 @@ test_memory mem(.Reset(Reset),
 					 .rden(Mem_OE), 
 					 .wren(Mem_WE), 
 					 .readout(MDR_In));
+					 
+					 
+//Include Mem2IO
+
+//Mem2IO memory_subsystem(
+//    .*, .Reset(Reset), .ADDR(ADDR), .Switches(SW),
+//    .HEX0(hex_4[0][3:0]), .HEX1(hex_4[1][3:0]), .HEX2(hex_4[2][3:0]), .HEX3(hex_4[3][3:0]),
+//    .Data_from_CPU(MDR), .Data_to_CPU(MDR_In),
+//    .Data_from_SRAM(Data_from_SRAM), .Data_to_SRAM(Data_to_SRAM)
+//);
 
 initial begin: TESTS
 // Test 1: Normal Test
@@ -158,9 +171,9 @@ endmodule
 //
 //endmodule
 
-///////////////////////////////////
-////// REAL MEMORY TESTBENCH //////
-///////////////////////////////////
+/////////////////////////////////
+//// REAL MEMORY TESTBENCH //////
+/////////////////////////////////
 
 //module testbench();
 //
