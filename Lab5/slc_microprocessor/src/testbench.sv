@@ -42,6 +42,8 @@ logic [15:0] 	MDR_In, ADDR;
 				  
 logic       	Mem_OE, Mem_WE;
 
+logic [9:0]    LED;
+
 logic [3:0] curr_state, next_state;
 
 assign curr_state = UUT2.State;
@@ -89,7 +91,7 @@ assign Opcode = IR[15:12];
 
 datapath UUT(.*);
 ISDU UUT2(
-	.*, .Opcode(Opcode), .IR_5(IR[5]), .IR_11(IR[11])
+	.*, .Opcode(Opcode), .IR_5(IR[5]), .IR_11(IR[11]), .ledVect12(IR[9:0])
 );
 test_memory mem(.Reset(Reset), 
 					 .Clk(Clk), 

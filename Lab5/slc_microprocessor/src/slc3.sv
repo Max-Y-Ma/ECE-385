@@ -58,7 +58,7 @@ Mem2IO memory_subsystem(
 // State Machine ***ADD BEN*** - done
 ISDU state_controller(
 	.*, .Reset(Reset), .Run(Run), .Continue(Continue),
-	.Opcode(IR[15:12]), .IR_5(IR[5]), .IR_11(IR[11]),
+	.Opcode(IR[15:12]), .IR_5(IR[5]), .IR_11(IR[11]), .ledVect12(IR[9:0]),
    .Mem_OE(OE), .Mem_WE(WE)
 );
 

@@ -23,9 +23,10 @@ module ISDU (
 								Run,
 								Continue,
 									
-	input logic[3:0]  	Opcode, 
+	input logic [3:0]  	Opcode, 
 	input logic         	IR_5,
 	input logic         	IR_11,
+	input logic [9:0]    ledVect12,
 	input logic         	BEN,
 				  
 	output logic        	LD_MAR,
@@ -51,26 +52,35 @@ module ISDU (
 								ALUK,
 				  
 	output logic       	Mem_OE,
-								Mem_WE
+								Mem_WE,
+								
+	output logic [9:0]   LED
 );
-
+	
 	// Internal state logic
-	enum logic [4:0] { 	Halted, 			//4 bits should be fine but it gives a compile error
-								PauseIR1, 
-								PauseIR2, 
-								S_18,
-								S_33_1,
-								S_33_2,
-								S_33_3, 
-								S_35, 
-								S_32, 
-								S_01,
-								S_05, S_09, S_06,
-								S_25_1, S_25_2, S_25_3,
-								S_27, S_07, S_23,
+	enum logic [4:0] { 	Halted, 	 	// 0: HALT
+								PauseIR1, 	// 1: Pause #1
+								PauseIR2, 	// 2: Pause #2
+								S_18,	    	// 3: MAR <- PC ; PC <- PC + 1
+								S_33_1,   	// 4: MDR <- M
+								S_33_2,		// 5: MDR M Wait
+								S_33_3, 		// 6: MDR M Wait
+								S_35, 		// 7: IR <- MDR
+								S_32, 		// 8: Decode
+								S_01,			// 9: ADD
+								S_05, 		// 10: AND
+								S_09, 		// 11: NOT
+								S_06,			// 12: LDR
+								S_25_1, S_25_2, S_25_3,		// LDR M Wait
+								S_27, 							// 
+								S_07, 							// 
+								S_23,								//
 								S_16_1, S_16_2, S_16_3,
-								S_04, S_21, S_12,
-								S_00, S_22}   State, Next_state;
+								S_04, 
+								S_21, 
+								S_12,
+								S_00, 
+								S_22}   State, Next_state;
 								
 	always_ff @ (posedge Clk)
 	begin
@@ -111,6 +121,8 @@ module ISDU (
 		 
 		Mem_OE = 1'b0;
 		Mem_WE = 1'b0;
+		
+		LED = 10'b0000000000;
 	
 		// Assign next state
 		unique case (State)
@@ -225,7 +237,8 @@ module ISDU (
 				else
 					Next_state = S_18;
 					
-			
+			S_22 : 
+				Next_state = S_18;
 
 			// You need to finish the rest of states..... - should be done
 
@@ -257,8 +270,10 @@ module ISDU (
 					GateMDR = 1'b1;
 					LD_IR = 1'b1;
 				end
-			PauseIR1: ;
-			PauseIR2: ;
+			PauseIR1: 
+				LED = ledVect12;
+			PauseIR2: 
+				LED = ledVect12;
 			S_32 : 
 				LD_BEN = 1'b1;
 			S_01 : 
