@@ -38,7 +38,7 @@ logic        	DRMUX, SR1MUX, SR2MUX, ADDR1MUX;
 logic [1:0]  	ADDR2MUX, ALUK;
 
 logic [15:0] 	MAR, MDR, IR, PC, BUS;
-logic [15:0] 	MDR_In;
+logic [15:0] 	MDR_In, ADDR;
 				  
 logic       	Mem_OE, Mem_WE;
 
@@ -63,6 +63,12 @@ assign R5 = UUT.RegFile_.Reg[5];
 assign R6 = UUT.RegFile_.Reg[6];
 assign R7 = UUT.RegFile_.Reg[7];
 
+//Include Mem2IO
+
+assign ADDR = MAR; 
+logic [9:0] SW;
+logic [15:0] Data_from_CPU, Data_from_SRAM;
+logic [15:0] Data_to_CPU, Data_to_SRAM;
 
 initial begin: SIGNAL_INITIALIZATION
 #1 Run = 1'b1;
@@ -71,7 +77,11 @@ initial begin: SIGNAL_INITIALIZATION
 	IR_5 = 1'b0;
 	IR_11 = 1'b0;
 	BEN = 1'b0;
+	SW = 10'h6;
 end
+
+
+
 
 // Unit Under Test
 
@@ -83,21 +93,26 @@ ISDU UUT2(
 );
 test_memory mem(.Reset(Reset), 
 					 .Clk(Clk), 
-					 .data(MDR), 
+					 .data(Data_to_SRAM), 
 					 .address(MAR[9:0]), 
 					 .rden(Mem_OE), 
 					 .wren(Mem_WE), 
-					 .readout(MDR_In));
+					 .readout(Data_from_SRAM));
 					 
 					 
-//Include Mem2IO
+					 
+//Hex display
 
-//Mem2IO memory_subsystem(
-//    .*, .Reset(Reset), .ADDR(ADDR), .Switches(SW),
-//    .HEX0(hex_4[0][3:0]), .HEX1(hex_4[1][3:0]), .HEX2(hex_4[2][3:0]), .HEX3(hex_4[3][3:0]),
-//    .Data_from_CPU(MDR), .Data_to_CPU(MDR_In),
-//    .Data_from_SRAM(Data_from_SRAM), .Data_to_SRAM(Data_to_SRAM)
-//);
+logic [3:0] hex_4 [3:0];
+//HexDriver hex_drivers[3:0] (hex_4, {HEX3, HEX2, HEX1, HEX0});
+
+
+Mem2IO memory_subsystem(
+    .*, .Reset(Reset), .ADDR(ADDR), .Switches(SW), .OE(Mem_OE), .WE(Mem_WE),
+    .HEX0(hex_4[0][3:0]), .HEX1(hex_4[1][3:0]), .HEX2(hex_4[2][3:0]), .HEX3(hex_4[3][3:0]),
+    .Data_from_CPU(MDR), .Data_to_CPU(MDR_In),
+    .Data_from_SRAM(Data_from_SRAM), .Data_to_SRAM(Data_to_SRAM)
+);
 
 initial begin: TESTS
 // Test 1: Normal Test

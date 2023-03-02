@@ -39,7 +39,7 @@ logic [15:0] MAR, MDR, IR;
 logic [15:0] PC, BUS;
 
 logic [3:0] hex_4 [3:0];
-HexDriver hex_drivers[3:0] (IR, {HEX3, HEX2, HEX1, HEX0});
+HexDriver hex_drivers[3:0] (hex_4, {HEX3, HEX2, HEX1, HEX0});
 
 assign ADDR = MAR; 
 assign MIO_EN = OE;

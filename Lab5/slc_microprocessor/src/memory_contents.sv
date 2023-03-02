@@ -31,17 +31,17 @@ task memory_contents(output logic[15:0] mem_array[0:size-1]);
 // any of your modifications to take effect.
 
    mem_array[   0 ] =    opCLR(R0)                ;       // Clear the register so it can be used as a base
-//   mem_array[   1 ] =    opLDR(R1, R0, inSW)      ;       // Load switches
-	mem_array[   1 ] =    opLDR(R1, R0, 6'b000011)      ;       // DK EDIT - CHANGE BACK!!
+   mem_array[   1 ] =    opLDR(R1, R0, inSW)      ;       // Load switches
+//	mem_array[   1 ] =    opLDR(R1, R0, 6'b000011)      ;       // DK EDIT - CHANGE BACK!!
    mem_array[   2 ] =    opJMP(R1)                ;       // Jump to the start of a program
    
                                                           // Basic I/O test 1
-//   mem_array[   3 ] =    opLDR(R1, R0, inSW)      ;       // Load switches
-//   mem_array[   4 ] =    opSTR(R1, R0, outHEX)    ;       // Output
-//   mem_array[   5 ] =    opBR(nzp, -3)            ;       // Repeat
+   mem_array[   3 ] =    opLDR(R1, R0, inSW)      ;       // Load switches
+   mem_array[   4 ] =    opSTR(R1, R0, outHEX)    ;       // Output
+   mem_array[   5 ] =    opBR(nzp, -3)            ;       // Repeat
 
-	mem_array[3] = opADDi(R0, R0, 5'b00101);
-	mem_array[4] = opPSE(12'h001);
+//	mem_array[3] = opADDi(R0, R0, 5'b00101);
+//	mem_array[4] = opPSE(12'h001);
                                       
                                                           // Basic I/O test 2
    mem_array[   6 ] =    opPSE(12'h801)           ;       // Checkpoint 1 - prepare to input
