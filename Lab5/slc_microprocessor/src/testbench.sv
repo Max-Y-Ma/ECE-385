@@ -50,6 +50,20 @@ assign next_state = UUT2.Next_state;
 logic MIO_EN;
 assign MIO_EN = Mem_OE;
 
+//Reg files
+
+logic [15:0] R0, R1, R2, R3, R4, R5, R6, R7;
+
+assign R0 = UUT.RegFile_.Reg[0];
+assign R1 = UUT.RegFile_.Reg[1];
+assign R2 = UUT.RegFile_.Reg[2];
+assign R3 = UUT.RegFile_.Reg[3];
+assign R4 = UUT.RegFile_.Reg[4];
+assign R5 = UUT.RegFile_.Reg[5];
+assign R6 = UUT.RegFile_.Reg[6];
+assign R7 = UUT.RegFile_.Reg[7];
+
+
 initial begin: SIGNAL_INITIALIZATION
 #1 Run = 1'b1;
 	Continue = 1'b1;
