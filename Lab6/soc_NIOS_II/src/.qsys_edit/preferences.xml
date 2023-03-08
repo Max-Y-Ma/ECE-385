@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <systemtable filter="All Interfaces">
+  <columns>
+   <connections preferredWidth="175" />
+   <irq preferredWidth="34" />
+  </columns>
+ </systemtable>
+ <library
+   expandedCategories="Library,Library/Basic Functions/Simulation; Debug and Verification/Debug and Performance,Project,Library/Basic Functions,Library/Basic Functions/Simulation; Debug and Verification" />
+ <window width="2578" height="1408" x="1911" y="-9" />
+ <generation path="lab61_soc" />
+</preferences>

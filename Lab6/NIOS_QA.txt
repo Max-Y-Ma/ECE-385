@@ -1,0 +1,84 @@
+Q: 	What are the differences between the Nios II/e and Nios II/f CPUs?
+A: 	The e is the economy version, which has only the processor and JTAG components (plus ECC). 
+	The f model has many more options and components premade, such as hardware multiply/divide, caches, MMU, MPU.
+----------------------------------------------------------------------------------------------------------------
+Q: 	What advantage might on-chip memory have for program execution?
+A: 	Reduces memory access latency. On-chip memory increases access speeds because it is physically closer to the CPU. 
+	Also, data does not have to pass through the SDRAM controller.
+----------------------------------------------------------------------------------------------------------------
+Q:	Note the bus connections coming from the NIOS II; is it a Von Neumann, 
+	“pure Harvard”, or “modified Harvard” machine and why?
+A:	Von Neumann: Shared Instruction and Data Bus
+	Pure Harvard: Seperate Instruction and Data Bus
+	Modified Harvad: Mixed
+	The Nios II architecture supports separate instruction and data buses, classifying it as a Harvard architecture. 
+----------------------------------------------------------------------------------------------------------------	
+Q:	Note that while the on-chip memory needs access to both the data and program bus, the led peripheral 
+	only needs access to the data bus. Why might this be the case?
+A:	The LED peripheral is an output peripheral that displays the data of the accumulator. Thus, it only need to access
+	the data bus, it is not processing (read/write) instructions. 
+----------------------------------------------------------------------------------------------------------------
+Q:	Why does SDRAM require constant refreshing?
+A:	DRAM memory is held using a transistor and a capacitor. Capacitors leak charge over time, 
+	so they need to be refreshed to their initial levels occasionally so that data isn't lost. 
+	In contrast to SRAM, which uses several transistors together in a loop to avoid refresh at the cost of space.
+----------------------------------------------------------------------------------------------------------------
+SDRAM Parameter | Parameter Value
+---------------------------------
+Data Width		|	16 bits
+# Rows			|	8192 ~ 8 Kbit
+# Column		|	1024 ~ 1 Kbit
+# Chip Selects	|	1 Chip Select
+# Banks			|	4 banks
+
+The board features a single 64MB (32 Mbit x 16 : 8 Mbit x 16 x 4 banks) SDRAM chip. The chip consists of 16-bit data line, 
+control line, and address line connected to the FPGA. 
+
+Q:	Justify how you came up with 512 Mbit
+A:	Total Size = 8 Kbit * 1 Kbit * 16 bits [data width] * 4 banks = 8 Mbit * 16 bits [data width] * 4 banks
+----------------------------------------------------------------------------------------------------------------
+Q:	What is the maximum theoretical transfer rate to the SDRAM according to the timings given? 
+A:	Without delays and recovery: 1 transfer (16 bits) / 5.4 ns ~ 370 MB/s
+	With delays and recovery: 1 transfer (16 bits) / 39.4 ns ~ 50 Mb/s
+----------------------------------------------------------------------------------------------------------------
+Q:	The SDRAM also cannot be run too slowly (below 50 MHz). Why might this be the case?
+A:	This has to do with the CAS latency: the time between supplying a column address and receiving the corresponding data.
+	In synchronous DRAM, the interval is specified in clock cycles. The SDRAM clock must toggle within that time period to 
+	capture the correct values after being refreshed. If the clock is too slow, it will capture incorrect values.
+	In the datasheet, it gives ranges from 100 Mhz to 200 Mhz. 
+----------------------------------------------------------------------------------------------------------------
+Q: 	Make another output by clicking clk c1, and verify it has the same settings, except that the phase shift should be -1ns. 
+	This puts the clock going out to the SDRAM chip (clk c1) 1ns behind of the controller clock (clk c0). 
+	Why do we need to do this?
+A: 	The reason why we want a clock going to the SDRAM chip 3ns behind its controller clock is because the 
+	controller takes time for address, data, and control signals to be valid at the SDRAM pins for the chip
+	which is why we need to delay the window of time of the clock where we capture those values within that time 
+	frame when the values are correct.
+----------------------------------------------------------------------------------------------------------------
+Q: 	What address does the NIOS II start execution from? Why do we do this step after assigning the addresses?
+A: 	The NIOS II starts execution from instructions in SDRAM starting at 0x08000000. We did this step after assigning
+	addresses so that we know the exact base address of the SDRAM. This is done after assigning the addresses 
+	so the processor knows where to go in cases where there may be an exception or a reset in which the processor 
+	returns to guarantee that there is no memory overlap
+----------------------------------------------------------------------------------------------------------------
+Q: 	You must be able to explain what each line of this (very short) program does to your TA. 
+	Specifically, you must be able to explain what the volatile keyword does (line 8), and 
+	how the set and clear functions work by working out an example on paper (lines 14 and 16).
+A:	Line 8 (Volatile): Objects declared as volatile are omitted from optimization because their values can be 
+					   changed by code outside the scope of current code at any time. The system always reads 
+					   the current value of a volatile object from the memory location rather than keeping its value 
+					   in a temporary register at the point it is requested, even if a previous instruction asked for 
+					   the value from the same object.
+	Line 14 (Set): Bitwise OR with 0x1 sets the LSB to 1
+	Line 16 (Clear): Bitwise AND with ~0x1 clears the LSB to 0
+----------------------------------------------------------------------------------------------------------------
+Q:	Look at the various segment (.bss, .heap, .rodata, .rwdata, .stack, .text), what does each section mean? 
+	Give an example of C code which places data into each segment, e.g. the code: const int my_constant[4] = {1, 2, 3, 4}
+	will place 1, 2, 3, 4 into the .rodata segment.
+A:  .bss: region with uninitialized data (variables and constants). Ex: int a;
+	.heap: region where memory is allocated. Ex: int ptr = (int)malloc(sizeof(int));
+	.rodata: region of static constants (not variables) - read only data. Ex: const int a = 0;
+	.rwdata: region of read/write data that can be changed. Ex: int a = 1;
+	.stack: region of stack where the activation record and function calls are stored. Ex: int func(int a, int b){}
+	.text: region of text/strings. Ex: char a = "text";
+----------------------------------------------------------------------------------------------------------------
