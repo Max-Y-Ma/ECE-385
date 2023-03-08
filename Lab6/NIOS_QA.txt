@@ -11,7 +11,8 @@ Q:	Note the bus connections coming from the NIOS II; is it a Von Neumann,
 A:	Von Neumann: Shared Instruction and Data Bus
 	Pure Harvard: Seperate Instruction and Data Bus
 	Modified Harvad: Mixed
-	The Nios II architecture supports separate instruction and data buses, classifying it as a Harvard architecture. 
+	The Nios II architecture supports separate instruction and data buses that are shared, classifying it as a 
+	Mixed Harvard architecture. 
 ----------------------------------------------------------------------------------------------------------------	
 Q:	Note that while the on-chip memory needs access to both the data and program bus, the led peripheral 
 	only needs access to the data bus. Why might this be the case?
@@ -39,7 +40,7 @@ A:	Total Size = 8 Kbit * 1 Kbit * 16 bits [data width] * 4 banks = 8 Mbit * 16 b
 ----------------------------------------------------------------------------------------------------------------
 Q:	What is the maximum theoretical transfer rate to the SDRAM according to the timings given? 
 A:	Without delays and recovery: 1 transfer (16 bits) / 5.4 ns ~ 370 MB/s
-	With delays and recovery: 1 transfer (16 bits) / 39.4 ns ~ 50 Mb/s
+	With delays and recovery: 1 transfer (16 bits) / 39.4 ns ~ 50 MB/s
 ----------------------------------------------------------------------------------------------------------------
 Q:	The SDRAM also cannot be run too slowly (below 50 MHz). Why might this be the case?
 A:	This has to do with the CAS latency: the time between supplying a column address and receiving the corresponding data.
@@ -50,7 +51,7 @@ A:	This has to do with the CAS latency: the time between supplying a column addr
 Q: 	Make another output by clicking clk c1, and verify it has the same settings, except that the phase shift should be -1ns. 
 	This puts the clock going out to the SDRAM chip (clk c1) 1ns behind of the controller clock (clk c0). 
 	Why do we need to do this?
-A: 	The reason why we want a clock going to the SDRAM chip 3ns behind its controller clock is because the 
+A: 	The reason why we want a clock going to the SDRAM chip 1ns behind its controller clock is because the 
 	controller takes time for address, data, and control signals to be valid at the SDRAM pins for the chip
 	which is why we need to delay the window of time of the clock where we capture those values within that time 
 	frame when the values are correct.
