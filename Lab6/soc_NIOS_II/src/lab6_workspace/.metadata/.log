@@ -186,3 +186,75 @@ Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING
 
 !ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 16:29:45.760
 !MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x98 --id=0x0 --timestamp=1678313611 /cygdrive/c/Users/unbre/Documents/lab6nospacepath/software/lab61_app/lab61_app.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:43:56.561
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 4 0 2023-03-08 17:43:57.153
+!MESSAGE No Byte Stream Services found for Nios II Console View
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:43:57.157
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x98 --id=0x0 --timestamp=1678313611]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:43:59.072
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x98 --id=0x0 --timestamp=1678313611 /cygdrive/c/Users/unbre/Documents/lab6nospacepath/software/lab61_app/lab61_app.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:48:51.490
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 4 0 2023-03-08 17:48:52.108
+!MESSAGE No Byte Stream Services found for Nios II Console View
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:48:52.109
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x98 --id=0x0 --timestamp=1678313611]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:48:54.000
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x98 --id=0x0 --timestamp=1678313611 /cygdrive/c/Users/unbre/Documents/lab6nospacepath/software/lab61_app/lab61_app.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:51:23.151
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 4 0 2023-03-08 17:51:23.769
+!MESSAGE No Byte Stream Services found for Nios II Console View
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:51:23.770
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x98 --id=0x0 --timestamp=1678313611]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:51:25.647
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x98 --id=0x0 --timestamp=1678313611 /cygdrive/c/Users/unbre/Documents/lab6nospacepath/software/lab61_app/lab61_app.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:53:50.743
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 4 0 2023-03-08 17:53:51.353
+!MESSAGE No Byte Stream Services found for Nios II Console View
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:53:51.354
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x98 --id=0x0 --timestamp=1678313611]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 17:53:53.259
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x98 --id=0x0 --timestamp=1678313611 /cygdrive/c/Users/unbre/Documents/lab6nospacepath/software/lab61_app/lab61_app.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 21:43:42.153
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 4 0 2023-03-08 21:43:42.812
+!MESSAGE No Byte Stream Services found for Nios II Console View
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 21:43:42.816
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x98 --id=0x0 --timestamp=1678313611]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 21:43:44.788
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x98 --id=0x0 --timestamp=1678313611 /cygdrive/c/Users/unbre/Documents/lab6nospacepath/software/lab61_app/lab61_app.elf]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 21:44:15.897
+!MESSAGE Terminated Launch with connection: 10USB-Blaster on localhost [USB-0]
+
+!ENTRY com.altera.sbtgui.launch 4 0 2023-03-08 21:44:16.491
+!MESSAGE No Byte Stream Services found for Nios II Console View
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 21:44:16.492
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --stop --sidp=0x98 --id=0x0 --timestamp=1678313611]
+
+!ENTRY com.altera.sbtgui.launch 1 0 2023-03-08 21:44:18.396
+!MESSAGE Executing: [C:/intelfpga_lite/18.1/quartus\bin64\cygwin\bin\bash.exe, -c, nios2-download '--cable=USB-Blaster on localhost [USB-0]' --device=1 --instance=0 --go --sidp=0x98 --id=0x0 --timestamp=1678313611 /cygdrive/c/Users/unbre/Documents/lab6nospacepath/software/lab61_app/lab61_app.elf]
