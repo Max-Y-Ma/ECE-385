@@ -26,6 +26,7 @@ logic Reset_ah, Continue_ah, Run_ah;
 assign Reset_ah = ~RUN_S & ~CONTINUE_S;
 assign Run_ah = ~RUN_S;
 assign Continue_ah = ~CONTINUE_S;
+assign Data = Data_to_SRAM;
 
 slc3 slc(.Reset(Reset_ah), .Continue(Continue_ah), .Run(Run_ah), .*);
 test_memory mem(.Reset(Reset_ah), .Clk(Clk), .data(Data_to_SRAM), .address(ADDR[9:0]), .rden(OE), .wren(WE), .readout(Data_from_SRAM) );
